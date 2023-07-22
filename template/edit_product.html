@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+
+{CSS}
+<style>
+    .select2-container--default .select2-selection--single{
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #5a6a85;
+        background-color: transparent;
+        background-clip: padding-box;
+        border: var(--bs-border-width) solid #dfe5ef;
+    }
+    .select2-container .select2-selection--single .select2-selection__rendered {
+    display: inline;
+    padding: 8px 16px;
+    width: 100%;
+    padding: 8px 16px;
+
+}
+</style>
+<body>
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+    {MENU}
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+      <!--  Header Start -->
+      {NAV}
+      <!--  Header End -->
+      <div class="container-fluid">
+        <!--  Row 1 -->
+   
+        <div class="row">
+        
+          <div class="col-lg-12 d-flex align-items-stretch">
+            <div class="card w-100">
+              <div class="card-body p-4">
+                <h5 class="card-title fw-semibold mb-4">การแก้ไขข้อมูลสินค้า</h5>
+                <div class="text-center">
+                  <svg id="barcode" jsbarcode-format="upc"></svg>
+                </div>
+                <form action="product_result" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3 row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">P/N BARCODE</label>
+                        <div class="col-sm-10">
+                          <div class="input-group">
+                            <input type="text" class="form-control" id="barcodeScaner" name="code" value="{code}" required>
+                            <button type="button" class="btn btn-success" onclick="generateProductNumber()">Generate</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="" class="col-sm-2 col-form-label">สาขา</label>
+                        <div class="col-sm-10">
+                          <select name="branchGlobal" id="branchGlobal" class="form-control" required>
+                            <option value="">กรุณาเลือกสาขา</option>
+                            <!-- BEGIN branchGlobal -->
+                            <option value="{branchGlobal.id}">{branchGlobal.name}</option>
+                            <!-- END branchGlobal -->
+                        </select>              
+                        </div>
+                     </div>
+                      <div class="mb-3 row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">ชื่อหมวดหมู่</label>
+                        <div class="col-sm-10">
+                            <select name="category" id="category" class="form-control js-example-basic-multiple-limit" required>
+                                <option value="">กรุณาเลือกหมวดหมู่</option>
+                                <!-- BEGIN category -->
+                                <option value="{category.id}">{category.name}</option>
+                                <!-- END category -->
+                            </select>     
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">ประเภทเลนส์</label>
+                        <div class="col-sm-10">
+                            <select name="type" id="type" class="form-control js-example-basic-multiple-limit" >
+                                <option value="">กรุณาเลือกประเภท</option>
+                                <!-- BEGIN type -->
+                                <option value="{type.id}">{type.name}</option>
+                                <!-- END type -->
+                            </select>        
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">ชนิดเลนส์</label>
+                        <div class="col-sm-10">
+                            <select name="kind" id="kind" class="form-control js-example-basic-multiple-limit" >
+                                <option value="">กรุณาเลือกชนิดเลนส์</option>
+                                <!-- BEGIN kind -->
+                                <option value="{kind.id}">{kind.name}</option>
+                                <!-- END kind -->
+                            </select>        
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">รหัสสินค้า</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="number" value="{number}" >
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">Model / ชื่อสินค้า</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="name" value="{model}" required>
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">ราคาต้นทุน</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="cost" value="{cost}" required>
+                            <input type="hidden" name="mode" value="mo">
+                            <input type="hidden" name="id" value="{id}">
+                            <input type="hidden" name="oldPath" value="{file}">
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">ราคาขาย</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="price" value="{price}" required>
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">จำนวน</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="amount" value="{amount}" required>
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">วันที่รับเข้า</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" name="date_lot" value="{date_lot}">
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">รูปภาพ</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control mb-2" name="fileToUpload" >
+                            <img src="{file}" width="150" alt="">
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary my-3"> <i class="ti ti-device-floppy"></i> แก้ไข</button>
+                            <a href="products" class="btn btn-secondary my-3"> <i class="ti ti-arrow-left"></i> ย้อนกลับ</a>
+                        </div>
+                      </div>
+                    
+                  
+                    </form>
+              </div>
+            </div>
+          </div>
+        </div>
+   
+    
+      </div>
+    </div>
+  </div>
+
+
+
+ {JS}
+ <script src="assets/js/jquery.scannerdetection.js"></script>
+ <script>
+    var type = '{type}';
+    var category = '{category}';
+    var kind = '{kind}';
+    var branch = '{branch}';
+      $(document).ready(function(){
+        $(document).scannerDetection({
+            timeBeforeScanTest: 200, 
+            avgTimeByChar: 100, 
+            onComplete: function(barcode, qty){
+                $('#barcodeScaner').focus();
+                $('#barcodeScaner').val(barcode);
+              } 
+        });
+
+        $(".js-example-basic-multiple-limit").select2({
+            allowClear: true
+        });
+      
+        var dataTable = $('#myTable').DataTable();
+        $("#category").val(category).trigger("change");
+        $("#type").val(type).trigger("change");
+        $("#kind").val(kind).trigger("change");
+        $("#branchGlobal").val(branch).trigger("change");
+
+        let barcode = $('#barcodeScaner').val();
+        $("#barcode").JsBarcode(barcode);
+
+        $('#barcodeScaner').on('input', function(e) {
+            $("#barcode").JsBarcode(e.target.value);
+          });
+        
+        $('#barcodeScaner').on('keyup', function(e) {
+            $("#barcode").JsBarcode(e.target.value);
+        });
+        
+        $('#barcodeScaner').on('click', function(e) {
+            $("#barcode").JsBarcode(e.target.value);
+        });
+    });
+  
+     function edit_branch(id){
+        var myModal = new bootstrap.Modal(document.getElementById('editData'), {});
+        myModal.show();
+        $.getJSON('employee_result?getId=' + id, function(data){
+
+            document.getElementById('branch_id').value = data.member_branch;
+            document.getElementById('member_id').value = data.member_id;
+            document.getElementById('member_name').value = data.member_name;
+            document.getElementById('member_phone').value = data.member_phone;
+            document.getElementById('member_username').value = data.member_username;
+            document.getElementById('member_code').value = data.member_code;
+        });
+     }
+
+     function generateProductNumber() {
+      const currentDate = new Date();
+      const timestamp = currentDate.getTime();
+      const characters = '0123456789';
+      let uniqueId = '';
+        uniqueId = String(timestamp);
+
+      for (let i = 0; i < 3; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        uniqueId += characters[randomIndex];
+      }
+
+      document.getElementById('barcodeScaner').value = uniqueId;
+      $("#barcode").JsBarcode(uniqueId);
+  }
+ </script>
+</body>
+
+</html>

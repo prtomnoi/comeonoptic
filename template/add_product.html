@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+
+{CSS}
+
+<body>
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+    {MENU}
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+      <!--  Header Start -->
+      {NAV}
+      <!--  Header End -->
+      <div class="container-fluid">
+        <!--  Row 1 -->
+   
+        <div class="row">
+       
+          <div class="col-lg-12 d-flex align-items-stretch">
+          
+            <div class="card w-100">
+            
+              <div class="card-body p-4">
+                <h5 class="card-title fw-semibold mb-4">การเพิ่มข้อมูลสินค้า</h5>
+                <div class="text-center">
+                    <svg id="barcode" jsbarcode-format="upc"></svg>
+                </div>
+                <form action="product_result" method="POST" id="formData" enctype="multipart/form-data">
+                  <label for="">P/N BARCODE</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="barcodeScaner" name="code" required>
+                        <button type="button" class="btn btn-success" onclick="generateProductNumber()">Generate</button>
+                    </div>
+                    <div class="form-group">
+                      <label for="">สาขา</label>
+                      <select name="branchGlobal" id="branchGlobal" class="form-control" required>
+                        <option value="">กรุณาเลือกสาขา</option>
+                        <!-- BEGIN branchGlobal -->
+                        <option value="{branchGlobal.id}">{branchGlobal.name}</option>
+                        <!-- END branchGlobal -->
+                    </select>                  
+                   </div>
+                    <div class="form-group mt-2">
+                        <label for="">ชื่อหมวดหมู่</label>
+                        <select name="category" id="categoryId" class="form-control js-example-basic-multiple-limit" required>
+                            <option value="">กรุณาเลือกหมวดหมู่</option>
+                            <!-- BEGIN category -->
+                            <option value="{category.id}">{category.name}</option>
+                            <!-- END category -->
+                        </select>                   
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="">POWER</label>
+                        <select name="type" id="powerId" class="form-control js-example-basic-multiple-limit" >
+                            <option value="">กรุณาเลือก POWER</option>
+                            <!-- BEGIN type -->
+                            <option value="{type.id}">{type.name}</option>
+                            <!-- END type -->
+                        </select>                   
+                    </div>
+                    <div class="form-group mt-2">
+                      <label for="">ชนิดเลนส์</label>
+                      <select name="kind" id="kindId" class="form-control js-example-basic-multiple-limit" >
+                          <option value="">กรุณาเลือกชนิดเลนส์</option>
+                          <!-- BEGIN kind -->
+                          <option value="{kind.id}">{kind.name}</option>
+                          <!-- END kind -->
+                      </select>                   
+                  </div>
+                    <div class="form-group mt-2">
+                        <label for="">รหัสสินค้า</label>
+                        <input type="text" class="form-control" id="numberId" name="number" >
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="">Model / ชื่อสินค้า</label>
+                        <input type="text" class="form-control" id="nameId" name="name" required>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="">ราคาต้นทุน</label>
+                        <input type="text" class="form-control" id="costId" name="cost" required>
+                        <input type="hidden" name="mode" value="add">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="">ราคาขาย</label>
+                        <input type="text" class="form-control" id="priceId" name="price" required>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="">จำนวน</label>
+                        <input type="text" class="form-control" id="amountId" name="amount" required>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="">วันที่รับเข้า</label>
+                        <input type="date" class="form-control" id="dateId" name="date_lot" value="{today}">
+                    </div>
+                    <div class="form-group mt-2">
+                      <label for="">รูปภาพ</label>
+                      <input type="file" class="form-control" name="fileToUpload" >
+                   </div>
+                    
+                    <button type="submit" class="btn btn-primary my-3"><i class="ti ti-device-floppy"></i> บันทึก</button>
+                    <a href="products" class="btn btn-secondary my-3"> <i class="ti ti-arrow-left"></i> ย้อนกลับ</a>  
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+   
+    
+      </div>
+    </div>
+  </div>
+
+
+ 
+ {JS}
+ <script src="assets/js/jquery.scannerdetection.js"></script>
+ <script>
+  
+      $(document).ready(function(){
+        
+        $(document).scannerDetection({
+            timeBeforeScanTest: 200, 
+            avgTimeByChar: 100, 
+            onComplete: function(barcode, qty){
+                $('#barcodeScaner').focus();
+                $('#barcodeScaner').val(barcode);
+                load_data(barcode);
+              } 
+        });
+
+        $(".js-example-basic-multiple-limit").select2({
+            allowClear: true
+        });
+      
+        var dataTable = $('#myTable').DataTable();
+          $('#barcodeScaner').on('input', function(e) {
+            $("#barcode").JsBarcode(e.target.value);8859133501524
+            8859133501524
+
+          });
+        
+        $('#barcodeScaner').on('keyup', function(e) {
+            $("#barcode").JsBarcode(e.target.value);
+        });
+        
+        $('#barcodeScaner').on('click', function(e) {
+            $("#barcode").JsBarcode(e.target.value);
+        });
+    });
+  
+     function edit_branch(id){
+        var myModal = new bootstrap.Modal(document.getElementById('editData'), {});
+        myModal.show();
+        $.getJSON('employee_result?getId=' + id, function(data){
+
+            document.getElementById('branch_id').value = data.member_branch;
+            document.getElementById('member_id').value = data.member_id;
+            document.getElementById('member_name').value = data.member_name;
+            document.getElementById('member_phone').value = data.member_phone;
+            document.getElementById('member_username').value = data.member_username;
+            document.getElementById('member_code').value = data.member_code;
+        });
+     }
+
+     function load_data(barcode) {
+        $.getJSON('product_result?barcode=' + barcode, function(data){
+            if(data != false){
+                $('#branchGlobal').val(data.product_branch).trigger("change");
+                $('#categoryId').val(data.product_category).trigger("change");
+                $('#powerId').val(data.product_type).trigger("change");
+                $('#kindId').val(data.product_kind).trigger("change");
+                $('#numberId').val(data.product_number);
+                $('#nameId').val(data.product_model);
+                $('#costId').val(data.product_cost);
+                $('#priceId').val(data.product_price);
+                $('#amountId').val(data.product_amount);
+            }else{
+               $('#branchGlobal').val("");
+               $('#categoryId').val("").trigger("change");
+                $('#powerId').val("").trigger("change");
+                $('#kindId').val("").trigger("change");
+                $('#numberId').val("");
+                $('#nameId').val("");
+                $('#costId').val("");
+                $('#priceId').val("");
+                $('#amountId').val("");
+               
+            } 
+        });
+     }
+
+     function generateProductNumber() {
+      const currentDate = new Date();
+      const timestamp = currentDate.getTime();
+      const characters = '0123456789';
+      let uniqueId = '';
+        uniqueId = String(timestamp);
+
+      for (let i = 0; i < 3; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        uniqueId += characters[randomIndex];
+      }
+      console.log(uniqueId);
+
+      document.getElementById('barcodeScaner').value = uniqueId;
+      $("#barcode").JsBarcode(uniqueId);
+  }
+   
+    
+
+ </script>
+</body>
+
+</html>

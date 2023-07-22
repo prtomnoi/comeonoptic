@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+    
+<html lang="en">
+<head>
+       <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google-site-verification" content="OlF0oV0E1Gssgid8JC1dsVaaw3jT_GIBTXSQwxpRoZk" />
+    <meta name="description" content="">
+
+    <title>Garena</title>
+{CSS}
+
+
+    
+        
+{MENU}
+ <style>
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 40px;
+    cursor: pointer;
+	border-radius: 12px;
+	border: 3px solid #2b2f37;
+	margin-top:10px;
+	
+}
+select#gameid option[value="League of Legends"] { background-image:url(female.png); }
+ </style>
+<div class="bg">
+
+    <div class="container">
+	       <div class="nk-gap-2"></div>
+        <div class="row">
+            <div class="col-lg-12">
+    
+
+                <!-- START: Posts List -->
+                <div class="nk-blog-list-classic">
+
+                    
+                        <!-- START: Post -->
+                        <div class="nk-blog-post">
+                            <div class="nk-post-content style22">
+                                <div class="row vertical-gap">
+									<div class="col-lg-12 text-center" >
+								   <form method="post">
+										<div class="row">
+											<div class="col-md-4">
+												<div class="profile-img">
+													<img src="{mpicdir}/{mpic}"  alt=""/>
+												
+												</div>
+					
+											
+											</div>
+											<div class="col-md-8">
+											  <form action="/action_page.php">
+											  	        <select id="gameid" name="game">
+														  <option data-thumbnail="assets/icon/logo01.png" >League of Legends</option>
+														</select>
+														<div class="row">
+														  <div class="col-sm-12"><input type="text" id="fname" name="firstname" value="{name_team}" readonly></div>
+														  <div class="col-sm-12"><input type="text" id="fname" name="firstname" value="{facebook_url}" readonly></div>
+														  <div class="col-sm-12"><button id="ccbtn3" type="submit" class="nk-btn nk-btn-x2 nk-btn-block nk-btn-rounded nk-btn nk-btn-circle "> Delete team</button></div>
+														</div>
+														
+													  </form>
+											</div>
+										
+										</div>
+								
+									</form>   
+								
+								
+									</div>
+											<!-- <div class="text-center"><a href="#" id="ccbtn" class="nk-btn nk-btn-x2 nk-btn-block nk-btn-rounded nk-btn nk-btn-circle "> JOIN NOW</a></div> -->
+							
+									</div>
+							     </div>
+								 
+								 <div class="row ">
+									  <div class="col-md-12">
+									        <!-- BEGIN team -->
+											 <div class="invite-team2" >
+												<div class="row">
+													<div class="col-md-8 text-left">
+												        <img src="{team.picdir}/{team.pic}"  alt="Avatar" class="avatar"/><a href="#"  >NAME : {team.fname} {team.lname}</a>
+													</div>
+													<div class="col-md-2 text-right">
+												        {team.kick}
+													</div>
+													<div class="col-md-2 text-right">
+												       <a  class="nk-btn nk-btn-circle nk-btn-x2 nk-btn-block {team.class}" >{team.status}</a>
+													</div>
+												</div>
+											</div>	
+											<!-- END team -->
+									         <!-- BEGIN invite -->
+											 <div class="invite-team text-center"  ><a href="#" > Invite</a></div>
+											 <!-- END invite -->
+											 <!-- <div class="invite-team text-center"  data-toggle="modal" data-target="#exampleModal3"><a href="#" > Invite</a></div> -->
+											 <!-- <div class="invite-team text-center"  data-toggle="modal" data-target="#exampleModal4"><a href="#" > Invite</a></div> -->
+											 <!-- <div class="invite-team text-center"  data-toggle="modal" data-target="#exampleModal5"><a href="#" > Invite</a></div> -->
+								
+											
+									  </div>
+									</div>
+								 
+		
+								</div>
+                            </div>
+               
+                   
+
+            </div>
+			
+
+            </div>
+        </div>
+   
+
+<!-- END: Header Title -->
+
+    <div class="nk-gap-6"></div>
+
+
+
+   </div>
+  
+
+
+
+ {FOOTER}
+
+
+        
+    </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    
+        <h5 class="modal-title text-center" id="exampleModalLabel">Invite Your team</h5>
+     
+      <div class="modal-body">
+        	<div class="row">
+				<div class="col-sm-12"><input type="text" id="key" name="firstname" placeholder="username"></div>	
+				<div class="col-sm-12 text-center">
+						<ul class="list-group" id="result"></ul>			
+				</div>	
+				   
+			</div>
+      </div>
+    
+    </div>
+  </div>
+</div>
+
+
+    
+  
+    
+
+{JS}
+<script>
+$(document).ready(function(){
+	 $.ajaxSetup({ cache: false });
+	 $('#key').keyup(function(){
+	  $('#result').html('');
+	  $.ajax({
+	      url : 'json_member.php',
+		  type : 'POST',
+		  data : {key : $('#key').val()},
+		  success : function (data){
+		   var obj = JSON.parse(JSON.stringify(data));
+		    $('#result').html('<a href="invite_result.php?id='+obj[0]['id']+'&teamid={teamid}&team={teamnum}"><div class="invite-team"><img src="'+obj[0]['picdir']+'/'+obj[0]['pic']+'"  alt="Avatar" class="avatar"/> Name : '+obj[0]['fname']+' '+obj[0]['lname']+'</div></a>');
+		  }
+	  });
+	 });
+	 
+
+	});
+  $('.invite-team').click(function(){
+      
+     $('#exampleModal').modal('show');
+  });
+
+
+</script>
+
+</body>
+</html>
+

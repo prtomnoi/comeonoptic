@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+
+{CSS}
+
+<body>
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+    {MENU}
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+      <!--  Header Start -->
+      {NAV}
+      <!--  Header End -->
+      <div class="container-fluid">
+        <!--  Row 1 -->
+   
+        <div class="row">
+        
+          <div class="col-lg-12 d-flex align-items-stretch">
+            <div class="card w-100">
+              <div class="card-body p-4">
+                <h5 class="card-title fw-semibold mb-4">การจัดการข้อมูลพนักงาน</h5>
+                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#addData" class="btn btn-primary mb-3"> <i class="ti ti-plus"></i> เพิ่มข้อมูล</a>
+                <div class="table-responsive">
+                  <table class="table text-nowrap mb-0 align-middle" id="myTable">
+                    <thead class="text-dark fs-4">
+                      <tr>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">ลำดับ</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">สาขา</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">รหัสพนักงาน / ชื่อพนักงาน</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">เบอร์โทรศัพท์</h6>
+                          </th>
+                          <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">อายุงาน</h6>
+                          </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">จัดการ</h6>
+                        </th>
+                      
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <!-- BEGIN member -->
+                      <tr>
+                         <td>{member.num}</td>
+                         <td>{member.branch}</td>
+                         <td>{member.code} / {member.name}</td>
+                         <td>{member.phone}</td>
+                         <td>{member.jobdate}</td>
+                         <td>
+                            <a href="javascript:void(0)" onclick="edit_branch('{member.id}')" class="btn btn-warning"><i class="ti ti-pencil"></i> แก้ไข</a>
+                            <a href="javascript:void(0)" onclick="delete_data('{member.id}', 'employee_result')" class="btn btn-danger"><i class="ti ti-trash"></i> ลบ</a>
+                        </td>
+                      </tr>              
+                      <!-- END member  -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+    
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addData" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูล</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="employee_result" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="">ชื่อสาขา</label>
+                    <select name="branch" id="" class="form-control" required>
+                        <option value="">กรุณาเลือกสาขา</option>
+                        <!-- BEGIN branch -->
+                        <option value="{branch.id}">{branch.name}</option>
+                        <!-- END branch -->
+                    </select>                   
+                </div>
+                <div class="form-group mt-2">
+                    <label for="">รหัสพนักงาน</label>
+                    <input type="text" class="form-control" name="code" >
+                </div>
+                <div class="form-group mt-2">
+                    <label for="">ชื่อพนักงาน</label>
+                    <input type="text" class="form-control" name="name" required>
+                    <input type="hidden" name="mode" value="add">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="">เบอร์โทรศัพท์</label>
+                    <input type="text" class="form-control" name="phone" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="">ชื่อเข้าใช้ระบบ (ภาษาอังกฤษเท่านั้น)</label>
+                    <input type="text" class="form-control" name="username" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="">รหัสผ่าน</label>
+                    <input type="password" class="form-control" name="password" required>
+                </div>
+                <div class="form-group mt-2">
+                  <label for="">วันเดือนปีเกิด</label>
+                  <input type="date" class="form-control" name="birthday" required>
+                </div>
+                <div class="form-group mt-2">
+                  <label for="">วันที่เข้างาน</label>
+                  <input type="date" class="form-control" name="jobdate" required>
+                </div>
+                <div class="form-group mt-2">
+                  <label for="">รูปถ่ายหน้าตรง</label>
+                  <input type="file" class="form-control" name="personal" required>
+                </div>
+                <div class="form-group mt-2">
+                  <label for="">รูปถ่ายบัตรประชาชน</label>
+                  <input type="file" class="form-control" name="idcard" required>
+                </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
+          <button type="submit" class="btn btn-primary">บันทึก</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editData" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">แก้ไขข้อมูล</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="employee_result" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="">ชื่อสาขา</label>
+                    <select name="branch" id="branch_id" class="form-control" required>
+                        <option value="">กรุณาเลือกสาขา</option>
+                        <!-- BEGIN branch -->
+                        <option value="{branch.id}">{branch.name}</option>
+                        <!-- END branch -->
+                    </select>                   
+                </div>
+                <div class="form-group mt-2">
+                    <label for="">รหัสพนักงาน</label>
+                    <input type="text" class="form-control" id="member_code" name="code" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="">ชื่อพนักงาน</label>
+                    <input type="text" class="form-control" id="member_name" name="name" required>
+                    <input type="hidden" name="mode" value="mo">
+                    <input type="hidden" name="id" id="member_id">
+                    <input type="hidden" name="old1" id="member_old1">
+                    <input type="hidden" name="old2" id="member_old2">
+              
+                </div>
+                <div class="form-group mt-2">
+                    <label for="">เบอร์โทรศัพท์</label>
+                    <input type="text" class="form-control" id="member_phone" name="phone" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="">ชื่อเข้าใช้ระบบ (ภาษาอังกฤษเท่านั้น)</label>
+                    <input type="text" class="form-control" id="member_username" name="username" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="">รหัสผ่าน</label>
+                    <input type="password" class="form-control"  name="password" >
+                </div>
+                <div class="form-group mt-2">
+                  <label for="">วันเดือนปีเกิด</label>
+                  <input type="date" class="form-control" id="member_birthday" name="birthday" required>
+                </div>
+                <div class="form-group mt-2">
+                  <label for="">วันที่เข้างาน</label>
+                  <input type="date" class="form-control" id="member_jobdate"  name="jobdate" required>
+                </div>
+                <div class="form-group mt-2">
+                  <label for="">รูปถ่ายหน้าตรง</label>
+                  <input type="file" class="form-control" name="personal" >
+                  <img src="" id="show_personal" width="150">
+                </div>
+                <div class="form-group mt-2">
+                  <label for="">รูปถ่ายบัตรประชาชน</label>
+                  <input type="file" class="form-control" name="idcard" >
+                  <img src="" id="show_idcard" width="150">
+                </div>
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
+          <button type="submit" class="btn btn-primary">บันทึก</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ {JS}
+ <script>
+      $(document).ready(function(){
+        var dataTable = $('#myTable').DataTable();
+    });
+   
+     function edit_branch(id){
+        var myModal = new bootstrap.Modal(document.getElementById('editData'), {});
+        myModal.show();
+        $.getJSON('employee_result?getId=' + id, function(data){
+
+            document.getElementById('branch_id').value = data.member_branch;
+            document.getElementById('member_id').value = data.member_id;
+            document.getElementById('member_name').value = data.member_name;
+            document.getElementById('member_phone').value = data.member_phone;
+            document.getElementById('member_username').value = data.member_username;
+            document.getElementById('member_code').value = data.member_code;
+            document.getElementById('member_birthday').value = data.member_birthday;
+            document.getElementById('member_jobdate').value = data.member_jobdate;
+            document.getElementById('show_personal').src = data.member_personal;
+            document.getElementById('member_old1').value = data.member_personal;
+            document.getElementById('member_old2').value = data.member_idcard;
+            document.getElementById('show_idcard').src = data.member_idcard;
+        });
+     }
+ </script>
+</body>
+
+</html>

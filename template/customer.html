@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+
+{CSS}
+
+<body>
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+    {MENU}
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+      <!--  Header Start -->
+      {NAV}
+      <!--  Header End -->
+      <div class="container-fluid">
+        <!--  Row 1 -->
+   
+        <div class="row">
+        
+          <div class="col-lg-12 d-flex align-items-stretch">
+            <div class="card w-100">
+              <div class="card-body p-4">
+                <h5 class="card-title fw-semibold mb-4">การจัดการข้อมูลสมาชิก</h5>
+                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#addData" class="btn btn-primary mb-3"> <i class="ti ti-plus"></i> เพิ่มข้อมูล</a>
+                <div class="table-responsive">
+                  <table class="table text-nowrap mb-0 align-middle" id="myTable">
+                    <thead class="text-dark fs-4">
+                      <tr>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">ลำดับ</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">ชื่อสมาชิก / อายุ</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">เบอร์โทรศัพท์</h6>
+                          </th>
+                          <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">วันที่สมัคร</h6>
+                          </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">จัดการ</h6>
+                        </th>
+                      
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <!-- BEGIN customer -->
+                    <tr>
+                         <td>{customer.num}</td>
+                         <td>{customer.name} / {customer.age} ปี</td>
+                         <td>{customer.phone}</td>
+                         <td>{customer.date}</td>
+                         <td>
+                            <a href="customer_detail?id={customer.id}&name={customer.name}" class="btn btn-info"><i class="ti ti-note"></i> ประวัติการใช้บริการ</a>
+                            <a href="javascript:void(0)" onclick="edit_branch('{customer.id}')" class="btn btn-warning"><i class="ti ti-pencil"></i> แก้ไข</a>
+                            <a href="javascript:void(0)" onclick="delete_data('{customer.id}', 'customer_result')" class="btn btn-danger"><i class="ti ti-trash"></i> ลบ</a>
+                        </td>
+                      </tr>              
+                      <!-- END customer  -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+    
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addData" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูล</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="customer_result" method="POST">
+              
+           
+                <div class="form-group mt-2">
+                    <label for="">ชื่อสมาชิก</label>
+                    <input type="text" class="form-control" name="name" required>
+                    <input type="hidden" name="mode" value="add">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="">เบอร์โทรศัพท์</label>
+                    <input type="text" class="form-control" name="phone" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="">อีเมล </label>
+                    <input type="email" class="form-control" name="email" >
+                </div>
+                <div class="form-group mt-2">
+                    <label for="">วันเดือนปีเกิด</label>
+                    <input type="date" class="form-control" name="birthday" >
+                </div>
+                <div class="form-group mt-2">
+                    <label for="">ที่อยู่</label>
+                    <textarea name="address" class="form-control" id="" cols="30" rows="4"></textarea>
+                </div>
+              
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
+          <button type="submit" class="btn btn-primary">บันทึก</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editData" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">แก้ไขข้อมูล</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="customer_result" method="POST">
+                <div class="form-group mt-2">
+                    <label for="">ชื่อสมาชิก</label>
+                    <input type="text" class="form-control" id="customer_name" name="name" required>
+                    <input type="hidden" name="mode" value="mo">
+                    <input type="hidden" name="id" id="customer_id">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="">เบอร์โทรศัพท์</label>
+                    <input type="text" class="form-control" id="customer_phone" name="phone" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="">อีเมล </label>
+                    <input type="email" class="form-control" id="customer_email" name="email" >
+                </div>
+                <div class="form-group mt-2">
+                    <label for="">วันเดือนปีเกิด</label>
+                    <input type="date" class="form-control" id="customer_birthday" name="birthday" >
+                </div>
+                <div class="form-group mt-2">
+                    <label for="">ที่อยู่</label>
+                    <textarea name="address" class="form-control" id="customer_address" cols="30" rows="4"></textarea>
+                </div>
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
+          <button type="submit" class="btn btn-primary">บันทึก</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ {JS}
+ <script>
+      $(document).ready(function(){
+        var dataTable = $('#myTable').DataTable();
+    });
+   
+     function edit_branch(id){
+        var myModal = new bootstrap.Modal(document.getElementById('editData'), {});
+        myModal.show();
+        $.getJSON('customer_result?getId=' + id, function(data){
+
+            document.getElementById('customer_id').value = data.customer_id;
+            document.getElementById('customer_name').value = data.customer_name;
+            document.getElementById('customer_phone').value = data.customer_phone;
+            document.getElementById('customer_email').value = data.customer_email;
+            document.getElementById('customer_birthday').value = data.customer_birthday;
+            document.getElementById('customer_address').value = data.customer_address;
+        });
+     }
+ </script>
+</body>
+
+</html>
