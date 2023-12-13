@@ -54,15 +54,10 @@
                         </select>                   
                     </div>
                     <div class="form-group mt-2">
-                        <label for="">POWER</label>
-                        <select name="type" id="powerId" class="form-control js-example-basic-multiple-limit" >
-                            <option value="">กรุณาเลือก POWER</option>
-                            <!-- BEGIN type -->
-                            <option value="{type.id}">{type.name}</option>
-                            <!-- END type -->
-                        </select>                   
+                        <label for="">POWER</label>    
+                        <input type="text" class="form-control" id="typeId" name="type" >     
                     </div>
-                    <div class="form-group mt-2">
+                    <div class="form-group mt-2" id="lendId">
                       <label for="">ชนิดเลนส์</label>
                       <select name="kind" id="kindId" class="form-control js-example-basic-multiple-limit" >
                           <option value="">กรุณาเลือกชนิดเลนส์</option>
@@ -71,7 +66,7 @@
                           <!-- END kind -->
                       </select>                   
                   </div>
-                    <div class="form-group mt-2">
+                    <div class="form-group mt-2 d-none">
                         <label for="">รหัสสินค้า</label>
                         <input type="text" class="form-control" id="numberId" name="number" >
                     </div>
@@ -119,7 +114,17 @@
  {JS}
  <script src="assets/js/jquery.scannerdetection.js"></script>
  <script>
+function formatNumber(input) {
+  const sign = input[0];
+  const number = parseInt(input.slice(1), 10);
+  const decimalNumber = (number / 100).toFixed(2);
   
+  const formattedNumber = sign+decimalNumber.toString();
+  return formattedNumber;
+}
+
+
+
       $(document).ready(function(){
         
         $(document).scannerDetection({
@@ -128,6 +133,19 @@
             onComplete: function(barcode, qty){
                 $('#barcodeScaner').focus();
                 $('#barcodeScaner').val(barcode);
+                const inputString = barcode ;
+                const regex = /[-+]\d{3,4}/g;
+    
+              const matches = barcode.match(regex) || [];
+
+              const formattedArray = matches.map(formatNumber);
+              if(formattedArray.length > 0){
+                $('#typeId').val(formattedArray.toString());
+                $('#lendId').removeClass('d-none');
+              }else{
+                 $('#lendId').addClass('d-none');
+              }
+               
                 load_data(barcode);
               } 
         });

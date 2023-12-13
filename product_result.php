@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-if($_POST['mode'] == 'add'){
+if(@$_POST['mode'] == 'add'){
     $price = $_POST['price'];
     $price = str_replace(',', '', $price);
     $price = str_replace('$', '', $price);
@@ -84,7 +84,7 @@ if($_POST['mode'] == 'add'){
 
 
 
-if($_POST['mode'] == 'mo'){
+if(@$_POST['mode'] == 'mo'){
 
     
     
@@ -167,16 +167,18 @@ if($_POST['mode'] == 'mo'){
     header("Location: products");
 }
 
-}else{
-
-if(@$_GET['barcode']){
+if(@$_POST['barcode']){
    
-    $con = Db::queryOne('SELECT * FROM tb_products WHERE product_barcode=?',$_GET['barcode']);
+    $con = Db::queryOne('SELECT * FROM tb_products WHERE product_barcode=?',$_POST['barcode']);
 
     header('Content-type: application/json; charset=utf-8');
     echo json_encode($con);
 
 }
+
+}else{
+
+
 
 if(@$_GET['sale']){
    

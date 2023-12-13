@@ -255,7 +255,9 @@
         });
       }
       function load_data(barcode) {
-        $.getJSON('product_result?barcode=' + barcode, function(data){
+        $.post('product_result', {
+          barcode : barcode
+        }, function(data){
             if(data != false){
               addToCart(data.product_id)
             }else{
