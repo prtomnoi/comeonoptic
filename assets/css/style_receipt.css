@@ -1,0 +1,151 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.invoice-box {
+    max-width: fit-content;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #eee;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    font-size: 16px;
+    line-height: 24px;
+    font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    color: #555;
+}
+
+.invoice-box table {
+    width: 100%;
+    line-height: inherit;
+    text-align: left;
+}
+
+.invoice-box table td {
+    padding: 5px;
+    vertical-align: top;
+}
+
+.invoice-box table tr td:nth-child(2) {
+    text-align: right;
+}
+
+.invoice-box table tr.top table td {
+    padding-bottom: 20px;
+}
+
+.invoice-box table tr.top table td.title {
+    font-size: 45px;
+    line-height: 45px;
+    color: #333;
+}
+
+.invoice-box table tr.information table td {
+    padding-bottom: 40px;
+}
+
+.invoice-box table tr.heading td {
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+}
+
+.invoice-box table tr.details td {
+    
+    border-bottom: 1px solid black;
+    border-top:1px solid black ;
+   
+  
+}
+
+.invoice-box table tr.item td {
+    border-bottom: 1px solid #004cff;
+    
+    
+}
+
+.invoice-box table tr.item.last td {
+    border-bottom: none;
+}
+
+.invoice-box table tr.total td:nth-child(2) {
+    border-top: 2px solid #eee;
+    font-weight: bold;
+}
+
+.invoice-box.rtl {
+    direction: rtl;
+    font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+}
+
+.invoice-box.rtl table {
+    text-align: right;
+}
+
+.invoice-box.rtl table tr td:nth-child(2) {
+    text-align: left;
+}
+.invoice{
+    width: 100%;
+    margin-right: 10px;
+}
+
+.invoicet{
+    margin-top: auto;
+    text-align: justify; 
+}
+.color_inovice{
+    color: 	#0066CC;
+    font-size: x-large;
+    float: right;
+    text-align: end;
+
+}
+.original{
+ color: black;
+ padding: 20px;
+}
+.original1{
+    color: black; 
+  
+   }
+
+.bb{
+    border-top: 1px solid black;
+}
+.pp{
+    float: right;
+    text-align: end;
+    text-align: center;
+    
+}
+.pp1{
+    text-align: start;
+    float: left;
+}
+.pp2{
+    float: right;
+    text-align: end;
+    text-align: center;
+  
+}
+.pp3{
+    text-align: start;
+    float: left;
+    padding-left: 60px;
+}
+.pp4{
+    text-align: start;
+    float: left;
+    padding-left: 90px;
+}
+
+
+
+
+
+
+
+
+
+

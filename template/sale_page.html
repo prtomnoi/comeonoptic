@@ -5,23 +5,25 @@
 
 <body>
   <!--  Body Wrapper -->
-    <div class="body-wrapper">
-      <div class="container-fluid">
-        <!--  Row 1 -->
-   
-        <div class="row">
-        
-          <div class="col-lg-12">
-              <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                  <a class="navbar-brand" href="#">ยินดีต้อนรับ {auth_name}</a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                   
-                      <!-- <li class="nav-item dropdown">
+  <div class="body-wrapper">
+    <div class="container-fluid">
+      <!--  Row 1 -->
+
+      <div class="row">
+
+        <div class="col-lg-12">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">ยินดีต้อนรับ {auth_name}</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                  <!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           Dropdown
                         </a>
@@ -32,106 +34,138 @@
                           <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
                       </li> -->
-                     
-                    </ul>
-                    <form class="d-flex">
-                  
-                      <a class="btn btn-outline-danger" href="logout" >ออกจากระบบ</a>
-                    </form>
+
+                </ul>
+                <form class="d-flex">
+
+                  <a class="btn btn-outline-danger" href="logout">ออกจากระบบ</a>
+                </form>
+              </div>
+            </div>
+          </nav>
+
+          <div class="row mt-4">
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-body">
+                  <!-- Shopping Cart -->
+                  <h5 class="card-title fw-semibold mb-4">รายการสั่งซื้อ</h5>
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="ค้นหาสมาชิก" id="customerSearch">
+                    <button class="btn btn-outline-primary" type="button" id="searchCustomer">
+                      <i class="ti ti-search"></i>
+                    </button>
+                  </div>
+                  <div class="form-group mb-2">
+                    <label for="">ชื่อ</label>
+                    <input type="hidden" class="form-control" name="customer_id" id="customer_id">
+                    <input type="text" class="form-control" name="customer_name" id="customer_name">
+                  </div>
+                  <div class="form-group mb-2">
+                    <label for="">เบอร์โทรศัพท์</label>
+                    <input type="text" class="form-control" name="customer_phone" id="customer_phone">
+                  </div>
+                  <!-- Cart items -->
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>สินค้า</th>
+                        <th>จำนวน</th>
+                        <th>ราคา</th>
+                        <th>ลบ</th>
+                      </tr>
+                    </thead>
+                    <tbody id="cartList">
+                      <!-- Cart items will be dynamically added here -->
+                    </tbody>
+                  </table>
+                  <h4>รวมทั้งหมด: <span id="totalAmount">0.00</span></h4>
+                  <div class="d-grid gap-2">
+                    <a href="receipt" class="btn btn-warning  mt-3"> ปิดการขาย </a>
+                    <!-- id="checkoutBtn" -->
+
                   </div>
                 </div>
-              </nav>
-            
-                <div class="row mt-4">
-                  <div class="col-md-4">
-                    <div class="card">
-                      <div class="card-body">
-                    <!-- Shopping Cart -->
-                        <h5 class="card-title fw-semibold mb-4">รายการสั่งซื้อ</h5>
-                        <div class="input-group mb-3">
-                          <input type="text" class="form-control" placeholder="ค้นหาสมาชิก" id="customerSearch">
-                          <button class="btn btn-outline-primary" type="button" id="searchCustomer">
-                            <i class="ti ti-search"></i>
-                          </button>
-                        </div>
-                        <div class="form-group mb-2">
-                           <label for="">ชื่อ</label>
-                           <input type="hidden" class="form-control" name="customer_id" id="customer_id">
-                           <input type="text" class="form-control" name="customer_name" id="customer_name">
-                        </div>
-                        <div class="form-group mb-2">
-                          <label for="">เบอร์โทรศัพท์</label>
-                          <input type="text" class="form-control" name="customer_phone" id="customer_phone">
-                       </div>
-                        <!-- Cart items -->
-                         <table class="table">
-                          <thead>
-                            <tr>
-                              <th>สินค้า</th>
-                              <th>จำนวน</th>
-                              <th>ราคา</th>
-                              <th>ลบ</th>
-                            </tr>
-                          </thead>
-                          <tbody id="cartList">
-                            <!-- Cart items will be dynamically added here -->
-                          </tbody>
-                        </table>
-                        <h4>รวมทั้งหมด: <span id="totalAmount">0.00</span></h4>
-                        <div class="d-grid gap-2">
-                          <button class="btn btn-warning  mt-3" id="checkoutBtn">ปิดการขาย</button>
-                        </div>
-                      </div>
-                    </div>
-                   
-                  </div>
-                    <div class="col-md-8">
-                      <div class="card ">
-                        <div class="card-body">
-                      <h5 class="card-title fw-semibold mb-4">ค้นหาสินค้า</h5>
-                      <!-- Product Search -->
-                      <div class="input-group mb-3">
+              </div>
+
+            </div>
+            <div class="col-md-8">
+              <div class="card ">
+                <div class="card-body">
+                  <h5 class="card-title fw-semibold mb-4">เพิ่มโปรโมชั่น</h5>
+                  <!-- Product Search -->
+                  <!-- <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="แสกนบาร์โค้ดเพื่อค้นหาสินค้า" id="barcodeScanner">
                         <button class="btn btn-outline-danger" type="button" id="clearButton">
                           <i class="ti ti-x"></i>
                         </button>
-                      </div>
-                        <div class="row" id="productList"></div>
+                      </div> -->
+                  <!-- <div class="row" id="productList"></div> -->
+                  <div class="card" style="width: 12rem; float: left; margin-right: 10px;">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                      <a href="#" class="card-link btn btn-warning ">เพิ่มโปรโมชั่น</a>
                     </div>
-              
-                  
                   </div>
+                  <div class="card" style="width: 12rem; float: left; margin-right: 10px;">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                      <a href="#" class="card-link btn btn-warning ">เพิ่มโปรโมชั่น</a>
+                    </div>
+                  </div>
+                  <div class="card" style="width: 12rem; float: left; margin-right: 10px;">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                      <a href="#" class="card-link btn btn-warning ">เพิ่มโปรโมชั่น</a>
+                    </div>
+                  </div>
+                  <div class="card" style="width: 12rem; float: left; margin-right: 10px;">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                      <a href="#" class="card-link btn btn-warning " >เพิ่มโปรโมชั่น</a>       
+                    </div>
                   </div>
                 </div>
-            
+
+              </div>
+
+
+            </div>
           </div>
         </div>
-    
-    
+
       </div>
     </div>
 
 
+  </div>
+  </div>
 
 
- {JS}
- <script src="assets/js/jquery.scannerdetection.js"></script>
- <script>
-       $(document).ready(function() {
-        $(document).scannerDetection({
-            timeBeforeScanTest: 200, 
-            avgTimeByChar: 100, 
-            onComplete: function(barcode, qty){
-                $('#barcodeScanner').focus();
-                $('#barcodeScanner').val(barcode);
-                load_data(barcode);
-              } 
-        });
-        $('#clearButton').click(function() {
-          $('#barcodeScanner').val('');
+
+
+  {JS}
+  <script src="assets/js/jquery.scannerdetection.js"></script>
+  <script>
+    $(document).ready(function () {
+      $(document).scannerDetection({
+        timeBeforeScanTest: 200,
+        avgTimeByChar: 100,
+        onComplete: function (barcode, qty) {
           $('#barcodeScanner').focus();
-          renderProducts();
-        });
+          $('#barcodeScanner').val(barcode);
+          load_data(barcode);
+        }
+      });
+      $('#clearButton').click(function () {
+        $('#barcodeScanner').val('');
+        $('#barcodeScanner').focus();
+        renderProducts();
+      });
       var products = []; // Empty array to hold the product data
       var cartItems = [];
 
@@ -140,17 +174,17 @@
         var productList = $("#productList");
         productList.empty();
         var searchTerm = $("#barcodeScanner").val().trim().toLowerCase();
-        
+
         var filteredProducts = products;
-          if (searchTerm) {
-            filteredProducts = products.filter(function(product) {
-              return (
-                product.product_model.toLowerCase().includes(searchTerm) ||
-                product.product_barcode.toLowerCase().includes(searchTerm)
-              );
-            });
-          }
-   
+        if (searchTerm) {
+          filteredProducts = products.filter(function (product) {
+            return (
+              product.product_model.toLowerCase().includes(searchTerm) ||
+              product.product_barcode.toLowerCase().includes(searchTerm)
+            );
+          });
+        }
+
         for (var i = 0; i < filteredProducts.length; i++) {
           var product = filteredProducts[i];
           var row = '<div class="col-md-2"><div class="card text-center">' +
@@ -204,36 +238,36 @@
       }
 
       // Event handler for adding a product to the cart
-      $(document).on("click", ".addToCart", function() {
+      $(document).on("click", ".addToCart", function () {
         var productId = $(this).data("id");
         addToCart(productId);
       });
 
       // Event handler for removing a product from the cart
-      $(document).on("click", ".removeFromCart", function() {
+      $(document).on("click", ".removeFromCart", function () {
         var index = $(this).data("index");
         removeFromCart(index);
       });
 
       // Event handler for search input keyup event
-      $("#barcodeScanner").on("keyup", function() {
+      $("#barcodeScanner").on("keyup", function () {
         renderProducts();
       });
 
       // Event handler for checkout button
-      $("#checkoutBtn").click(function() {
+      $("#checkoutBtn").click(function () {
         let customerId = $('#customer_id').val();
         let customerName = $('#customer_name').val();
         let customerPhone = $('#customer_phone').val();
         $.ajax({
-           url : "save_order",
-           type : "post",
-           data : {
-              customerId : customerId,
-              customerName : customerName,
-              customerPhone: customerPhone,
-              products : cartItems
-           }
+          url: "save_order",
+          type: "post",
+          data: {
+            customerId: customerId,
+            customerName: customerName,
+            customerPhone: customerPhone,
+            products: cartItems
+          }
         });
         alert("Checkout completed. Total amount: " + $("#totalAmount").text());
       });
@@ -243,43 +277,43 @@
         $.ajax({
           url: "product_result",
           type: 'get',
-          data : {sale : 1},
+          data: { sale: 1 },
           dataType: "json",
-          success: function(data) {
+          success: function (data) {
             products = data; // Assign the retrieved product data to the 'products' array
             renderProducts(); // Render the products
           },
-          error: function() {
+          error: function () {
             console.error("Failed to load products.");
           }
         });
       }
       function load_data(barcode) {
         $.post('product_result', {
-          barcode : barcode
-        }, function(data){
-            if(data != false){
-              addToCart(data.product_id)
-            }else{
-              renderProducts();
-            } 
+          barcode: barcode
+        }, function (data) {
+          if (data != false) {
+            addToCart(data.product_id)
+          } else {
+            renderProducts();
+          }
         });
-     }
+      }
 
       // Initial loading of products
       loadProducts();
     });
 
-    $('#searchCustomer').click(function(e){
-       e.preventDefault();
-       let phone = $('#customerSearch').val();
-       $.getJSON('customer_result?phone='+phone, function(data){
-           $('#customer_name').val(data.customer_name);
-           $('#customer_phone').val(data.customer_phone);
-           $('#customer_id').val(data.customer_id);
-       });
+    $('#searchCustomer').click(function (e) {
+      e.preventDefault();
+      let phone = $('#customerSearch').val();
+      $.getJSON('customer_result?phone=' + phone, function (data) {
+        $('#customer_name').val(data.customer_name);
+        $('#customer_phone').val(data.customer_phone);
+        $('#customer_id').val(data.customer_id);
+      });
     });
- </script>
+  </script>
 </body>
 
 </html>
