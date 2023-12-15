@@ -12,7 +12,7 @@
       <div class="row">
 
         <div class="col-lg-12">
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-radius: 10px;">
             <div class="container-fluid">
               <a class="navbar-brand" href="#">ยินดีต้อนรับ {auth_name}</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -45,6 +45,22 @@
           </nav>
 
           <div class="row mt-4">
+            <div class="col-md-12">
+              <div class="card mb-2 ">
+                <div class="card-body">
+                  <h5 class="card-title fw-semibold mb-4">บาร์โค้ดสินค้า</h5>
+                  <!-- Product Search -->
+                  <div class="input-group mb-2">
+                    <input type="text" class="form-control" placeholder="แสกนบาร์โค้ดเพื่อค้นหาสินค้า"
+                      id="barcodeScanner">
+                    <button class="btn btn-outline-danger" type="button" id="clearButton">
+                      <i class="ti ti-x"></i>
+                    </button>
+                  </div>
+                  <!-- <div class="row" id="productList"></div> -->
+                </div>
+              </div>
+            </div>
             <div class="col-md-4">
               <div class="card">
                 <div class="card-body">
@@ -81,65 +97,60 @@
                   </table>
                   <h4>รวมทั้งหมด: <span id="totalAmount">0.00</span></h4>
                   <div class="d-grid gap-2">
-                    <a href="receipt" class="btn btn-warning  mt-3"> ปิดการขาย </a>
+                    <a href="receipt" class="btn btn-warning  mt-3" id="checkoutBtn"> ปิดการขาย </a>
                     <!-- id="checkoutBtn" -->
-
                   </div>
                 </div>
               </div>
 
             </div>
             <div class="col-md-8">
-              <div class="card ">
+
+              <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title fw-semibold mb-4">เพิ่มโปรโมชั่น</h5>
-                  <!-- Product Search -->
-                  <!-- <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="แสกนบาร์โค้ดเพื่อค้นหาสินค้า" id="barcodeScanner">
-                        <button class="btn btn-outline-danger" type="button" id="clearButton">
-                          <i class="ti ti-x"></i>
-                        </button>
-                      </div> -->
-                  <!-- <div class="row" id="productList"></div> -->
-                  <div class="card" style="width: 12rem; float: left; margin-right: 10px;">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                      <a href="#" class="card-link btn btn-warning ">เพิ่มโปรโมชั่น</a>
+                  <h5 class="card-title fw-semibold mb-2">เพิ่มโปรโมชั่น</h5>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="card text-center">
+                        <div class="card-body">
+                          <h5 class="card-title">Special title </h5>
+                          <p class="card-text">With supporting </p>
+                          <a href="#" class="btn btn-sm btn-warning ">เพิ่มโปรโมชั่น</a>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div class="card" style="width: 12rem; float: left; margin-right: 10px;">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                      <a href="#" class="card-link btn btn-warning ">เพิ่มโปรโมชั่น</a>
+                    <div class="col-sm-4">
+                      <div class="card text-center">
+                        <div class="card-body">
+                          <h5 class="card-title">Special title </h5>
+                          <p class="card-text">With supporting </p>
+                          <a href="#" class="btn btn-sm btn-warning ">เพิ่มโปรโมชั่น</a>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div class="card" style="width: 12rem; float: left; margin-right: 10px;">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                      <a href="#" class="card-link btn btn-warning ">เพิ่มโปรโมชั่น</a>
+                    <div class="col-sm-4">
+                      <div class="card text-center">
+                        <div class="card-body">
+                          <h5 class="card-title">Special title </h5>
+                          <p class="card-text">With supporting </p>
+                          <a href="#" class="btn btn-sm btn-warning ">เพิ่มโปรโมชั่น</a>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div class="card" style="width: 12rem; float: left; margin-right: 10px;">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                      <a href="#" class="card-link btn btn-warning " >เพิ่มโปรโมชั่น</a>       
-                    </div>
+
                   </div>
                 </div>
-
               </div>
 
-
             </div>
+
+
           </div>
         </div>
-
       </div>
+
     </div>
+  </div>
 
 
   </div>
